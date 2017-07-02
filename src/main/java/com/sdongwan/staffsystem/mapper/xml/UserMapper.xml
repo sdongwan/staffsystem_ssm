@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--注意这个命名空间要写对，完整的包名路径，不是随便写的-->
+<mapper namespace="com.sdongwan.staffsystem.mapper.UserMapper">
+    <resultMap id="user" type="user">
+        <id column="userId" property="userId" jdbcType="INTEGER" javaType="Integer"/>
+        <result column="name" property="name" javaType="string" jdbcType="VARCHAR"/>
+        <result column="userName" property="username" javaType="string" jdbcType="INTEGER"/>
+        <result column="userPass" property="userPass" javaType="string" jdbcType="VARCHAR"/>
+        <result column="sex" property="sex" javaType="string" jdbcType="VARCHAR"/>
+        <result column="photo" property="photo" javaType="string" jdbcType="VARCHAR"/>
+        <result column="postId" property="postId" javaType="Integer" jdbcType="INTEGER"/>
+        <result column="remark" property="remark" javaType="string" jdbcType="VARCHAR"/>
+        <result column="entryDate" property="entryDate" javaType="java.sql.Date" jdbcType="DATE"/>
+        <result column="birthday" property="birthday" javaType="java.sql.Date" jdbcType="DATE"/>
+    </resultMap>
+
+
+
+    <insert id="insertUser" parameterType="user">
+        INSERT INTO
+         USER(userId,name,userName,userPass,sex,photo,postId,remark,birthday,entryDate)
+         VALUES (#{userId},#{name},#{username},#{userPass},#{sex},#{photo},#{postId},#{remark},#{birthday},#{entryDate});
+
+    </insert>
+
+    <delete id="delUser" parameterType="user">
+        DELETE from user where userId=#{userId}
+    </delete>
+    <select id="findByPostId" resultType="user" parameterType="Integer">
+        <!--因为使用了自动映射，所以as重命名很重要，保证名字与实体的属性名字相同才可以自动映射 -->
+        SELECT * FROM user WHERE postId=#{postId};
+    </select>
+
+    <select id="findAllUser" resultType="user">
+        select * from user;
+    </select>
+
+    <select id="getUserCount" resultType="int">
+        select count(userId) from user;
+    </select>
+
+    <select id="getPostUserCount" resultType="int" parameterType="Integer">
+        select count(userId) from user where postId=#{postId};
+    </select>
+
+    <select id="findByUserId" resultType="user" parameterType="Integer">
+
+        SELECT * FROM user where userId=#{userId};
+
+    </select>
+
+    <select id="findByUserName" resultType="user" parameterType="string">
+        <!--因为使用了自动映射，所以as重命名很重要，保证名字与实体的属性名字相同才可以自动映射 -->
+        SELECT * FROM user WHERE userName=#{username};
+    </select>
+
+
+
+    <update id="updateUser" parameterType="user">
+        update user set userId=#{userId},name=#{name},userName=#{username},userPass=#{userPass},sex=#{sex},photo=#{photo},postId=#{postId},remark=#{remark},birthday=#{birthday},entryDate=#{entryDate};
+    </update>
+
+
+
+</mapper>

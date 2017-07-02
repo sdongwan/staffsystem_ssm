@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdongwan.staffsystem.mapper.PostMapper">
+    <resultMap id="post" type="post">
+        <id column="postId" property="postId" jdbcType="INTEGER" javaType="Integer"/>
+        <result column="postName" property="postName" javaType="string" jdbcType="VARCHAR"/>
+        <result column="postNum" property="postNum" javaType="Integer" jdbcType="INTEGER"/>
+        <result column="postRemark" property="postRemark" javaType="string" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <insert id="insertPost" parameterType="post">
+
+       INSERT  INTO post(postId,postName,postNum,postRemark) VALUES (#{postId},#{postName},#{postNum},#{postRemark});
+    </insert>
+
+    <update id="updatePost" parameterType="post">
+        update post set postName=#{postName},postNum=#{postNum},postRemark=#{postRemark} where postId=#{postId};
+    </update>
+
+    <delete id="delPost" parameterType="post">
+      DELETE from post where postId=#{postId}
+    </delete>
+
+    <select id="findAllPost" resultType="post">
+
+        SELECT * FROM post;
+
+    </select>
+
+    <select id="findByPostId" resultType="post" parameterType="int">
+        <!--因为使用了自动映射，所以as重命名很重要，保证名字与实体的属性名字相同才可以自动映射 -->
+        SELECT * FROM post WHERE  postId=#{postId};
+    </select>
+
+    <select id="findByPostName" resultType="post" parameterType="string">
+        <!--因为使用了自动映射，所以as重命名很重要，保证名字与实体的属性名字相同才可以自动映射 -->
+        SELECT * FROM post WHERE  postName=#{postName};
+    </select>
+
+
+</mapper>

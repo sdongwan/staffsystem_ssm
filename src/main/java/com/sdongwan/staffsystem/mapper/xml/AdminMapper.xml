@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--注意这个命名空间要写对，完整的包名路径，不是随便写的-->
+<mapper namespace="com.sdongwan.staffsystem.mapper.AdminMapper">
+    <resultMap id="admin" type="admin">
+        <id column="adminId" property="adminId" javaType="Integer" jdbcType="INTEGER"/>
+        <result column="adminName" property="adminName" javaType="string" jdbcType="VARCHAR"/>
+        <result column="adminUserName" property="adminUserName" javaType="string" jdbcType="VARCHAR"/>
+        <result column="adminPwd" property="adminPwd" javaType="string" jdbcType="VARCHAR"/>
+        <result column="loginCount" property="loginCount" javaType="Integer" jdbcType="INTEGER"/>
+    </resultMap>
+
+
+    <select id="findAllAdmin" resultType="admin">
+
+        select * from admin;
+    </select>
+
+    <select id="findByAdminUsernameAndPwd" resultType="admin" parameterType="string">
+
+        select * from admin where adminUserName=#{arg0} and adminPwd=#{arg1};
+    </select>
+
+    <select id="findByAdminUserName" resultType="admin" parameterType="string">
+        SELECT * FROM admin WHERE adminUserName=#{adminUserName};
+    </select>
+
+    <select id="findByAdminName" resultType="admin" parameterType="string">
+
+           SELECT * FROM admin WHERE adminName=#{adminName};
+
+    </select>
+
+    <select id="findByAdminId" resultType="admin" parameterType="int">
+        <!--因为使用了自动映射，所以as重命名很重要，保证名字与实体的属性名字相同才可以自动映射 -->
+        SELECT * FROM admin WHERE adminId=#{adminId};
+    </select>
+
+
+    <insert id="addNewAdmin" parameterType="admin">
+    INSERT INTO admin(adminId,adminName,adminUserName,adminPwd,loginCount) VALUES (#{adminId},#{adminName},#{adminUserName},#{adminPwd},#{loginCount});
+    </insert>
+
+
+    <update id="updateAdmin" parameterType="admin">
+
+    UPDATE admin  SET   adminName=#{adminName},adminUserName=#{adminUserName},adminPwd=#{adminPwd},loginCount=#{loginCount} WHERE adminId=#{adminId};
+
+    </update>
+
+
+</mapper>

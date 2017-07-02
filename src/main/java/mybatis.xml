@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+        <!-- 定义别名-->
+        <typeAlias type="com.sdongwan.staffsystem.entity.Admin" alias="admin"/>
+        <typeAlias type="com.sdongwan.staffsystem.entity.Post" alias="post"/>
+        <typeAlias type="com.sdongwan.staffsystem.entity.User" alias="user"/>
+    </typeAliases>
+
+
+    <mappers>
+        <!--使用"/"分隔，而不是"." -->
+        <mapper resource="com/sdongwan/staffsystem/mapper/xml/AdminMapper.xml"/>
+        <mapper resource="com/sdongwan/staffsystem/mapper/xml/PostMapper.xml"/>
+        <mapper resource="com/sdongwan/staffsystem/mapper/xml/UserMapper.xml"/>
+
+    </mappers>
+</configuration>

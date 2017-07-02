@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!--ndash; 扫描指定包中的类，注册bean;-->
+    <context:component-scan base-package="com.sdongwan.staffsystem.controller"/>
+    <context:component-scan base-package="com.sdongwan.staffsystem.entity"/>
+    <context:component-scan base-package="com.sdongwan.staffsystem.dao"/>
+    <context:component-scan base-package="com.sdongwan.staffsystem.service"/>
+
+
+    <!-- 配置注解驱动-->
+    <mvc:annotation-driven/>
+
+    <!-- 配置静态资源，不经过servlet，直接访问-->
+    <!--<mvc:resources mapping="/css/**" location="/css/"/>-->
+    <mvc:resources mapping="/image/*" location="/image/"/>
+    <mvc:resources mapping="/upload/*" location="/upload/"/>
+
+
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!-- 定义前后缀，这样我们在控制器中可以直接返回name，spring会自动添加前后缀-->
+        <property name="prefix" value="/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+</beans>
