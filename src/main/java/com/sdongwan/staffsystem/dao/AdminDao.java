@@ -23,5 +23,4 @@ public interface AdminDao {
 
     void updateAdmin(Admin admin);
 
-
 }
